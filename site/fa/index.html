@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="fa" dir="rtl" class="is-loading">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>آموزش آردوینو — درس‌های تعاملی سه‌بعدی برای مبتدی‌ها</title>
+    <meta name="description" content="آردوینو را روی یک برد تعاملی سه‌بعدی یاد بگیرید: LED، دکمه، سنسور، موتور و سروو را سیم‌کشی کنید، سپس کد را اجرا کنید و کارکردش را ببینید. ۱۶ درس رایگان برای مبتدی‌ها." />
+    <meta name="author" content="Arad Azarpanah" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#f6eddd" />
+    <meta name="color-scheme" content="light" />
+    <meta name="application-name" content="آموزش آردوینو" />
+    <meta name="apple-mobile-web-app-title" content="آموزش آردوینو" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- link previews (Open Graph, X) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="آموزش آردوینو" />
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:title" content="آموزش آردوینو — درس‌های تعاملی سه‌بعدی" />
+    <meta property="og:description" content="LED، دکمه، سنسور، موتور و سروو را روی یک ⁦Arduino Uno⁩ سه‌بعدی سیم‌کشی کنید، سپس کد را اجرا کنید و کارکردش را ببینید. ۱۶ درس رایگان برای مبتدی‌ها." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="Arad Azarpanah" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="یک ⁦Arduino Uno⁩ سه‌بعدی مصور که روی بردبورد به یک سنسور فاصله و یک چراغ راهنمایی وصل شده و یک ماشین اسباب‌بازی جلوی آن است" />
+    <meta name="twitter:image" content="/og-image.png" />
+    <meta name="twitter:image:alt" content="یک ⁦Arduino Uno⁩ سه‌بعدی مصور که روی بردبورد به یک سنسور فاصله و یک چراغ راهنمایی وصل شده و یک ماشین اسباب‌بازی جلوی آن است" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":["WebApplication","LearningResource"],"name":"آموزش آردوینو","url":"/","description":"آردوینو را روی یک برد تعاملی سه‌بعدی یاد بگیرید: LED، دکمه، سنسور، موتور و سروو را سیم‌کشی کنید، سپس کد را اجرا کنید و کارکردش را ببینید. ۱۶ درس رایگان برای مبتدی‌ها.","image":"/og-image.png","applicationCategory":"EducationalApplication","operatingSystem":"Any (runs in a web browser with WebGL)","browserRequirements":"Requires JavaScript and WebGL.","inLanguage":"fa","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"educationalLevel":"Beginner","learningResourceType":"Interactive lesson","teaches":["آشنایی با برد","چشمک‌زدن LED","فشردن دکمه","چرخاندن ولوم","ترکیب رنگ‌ها","حس‌کردن نور","خواندن سنسور","تولید صدا","پیانوی کوچک","کنترل موتور","حس‌کردن گرما","چرخاندن سروو","چرخاندن گردونه","گلدان هوشمند","حس‌کردن نیرو","ساخت یک پروژه"],"about":["Arduino","Electronics","Microcontrollers","Programming"],"author":{"@type":"Person","name":"Arad Azarpanah","url":"https://aradazr.site"}}</script>
+    <!-- linked here rather than imported from main.js, so the first paint
+         (the loading screen) is already styled, on the dev server too -->
+    <link rel="preload" href="/assets/barlow-semi-condensed-latin-600-normal-BkLiAYu4.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/barlow-semi-condensed-latin-500-normal-G0uxJNrM.woff2" as="font" type="font/woff2" crossorigin />
+    <script type="module" crossorigin src="/assets/index-BodLthS6.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CeIbtN2h.css">
+      <link rel="preload" href="/assets/fonts/Peyda-Medium.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/Peyda-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/assets/fa-rtl.css?v=8014a8ba" />
+  </head>
+  <body>
+    <!-- Covers the page until the board is built and every lesson card has
+         its picture (src/ui/loader.js) -->
+    <div class="loader" id="loader" role="status" aria-live="polite">
+      <div class="loader-inner">
+        <svg class="loader-logo" viewBox="0 0 92 50" aria-hidden="true">
+          <path class="loop" d="M24 6.5a18.5 18.5 0 1 0 0 37c8.7 0 13.4-6.6 22-18.5S59.3 6.5 68 6.5a18.5 18.5 0 1 1 0 37c-8.7 0-13.4-6.6-22-18.5S32.7 6.5 24 6.5z" />
+          <path class="sign" d="M15.5 25h12M62 25h12M68 19v12" />
+        </svg>
+        <p class="loader-title">آموزش آردوینو</p>
+        <div class="loader-track" aria-hidden="true"><span class="loader-fill"></span><span class="loader-shine"></span></div>
+        <p class="loader-step">در حال بارگذاری</p>
+        <noscript>
+          <style>.loader{overflow:auto}.loader-track,.loader-step{display:none}</style>
+          <div class="noscript">
+            <p>یک دورهٔ تعاملی سه‌بعدی در مرورگر شما. برای شروع، جاوااسکریپت را روشن کنید.</p>
+            <ol class="noscript-lessons"><li><b>۱. آشنایی با برد</b> — آردوینو اونو ⁦(Arduino Uno)⁩ یک برد میکروکنترلر محبوب بر پایهٔ ATmega328P است.</li><li><b>۲. چشمک‌زدن LED</b> — اولین مدار شما: یک LED و یک مقاومت روی بردبورد که با پایهٔ 13 کنترل می‌شوند.</li><li><b>۳. فشردن دکمه</b> — ورودی‌ها به برد اجازه می‌دهند دنیای اطراف را حس کند.</li><li><b>۴. چرخاندن ولوم</b> — پتانسیومتر (Potentiometer) یک مقاومت با لغزنده است.</li><li><b>۵. ترکیب رنگ‌ها</b> — یک ⁦LED RGB⁩ در واقع سه LED است — قرمز، سبز و آبی — زیر یک لنز مات.</li><li><b>۶. حس‌کردن نور</b> — مقاومت وابسته به نور (LDR) هرچه نور بیشتری به آن بتابد، بهتر جریان را عبور می‌دهد.</li><li><b>۷. خواندن سنسور</b> — ⁦HC-SR04⁩ یک موج فراصوت (Ultrasound) می‌فرستد و به پژواکش گوش می‌دهد.</li><li><b>۸. تولید صدا</b> — بازر پیزو ⁦(Piezo buzzer)⁩ هر بار که پایه‌اش تغییر وضعیت می‌دهد یک تیک می‌زند.</li><li><b>۹. پیانوی کوچک</b> — هشت کلید و یک بازر، پیانویی می‌سازند که می‌توانید با آن بنوازید.</li><li><b>۱۰. کنترل موتور</b> — یک پایه به‌تنهایی نمی‌تواند موتور را راه بیندازد، پس یک ترانزیستور (Transistor) کار سنگین را انجام می‌دهد.</li><li><b>۱۱. حس‌کردن گرما</b> — TMP36 دما را به ولتاژ تبدیل می‌کند: ⁦0.5 V⁩ در ⁦0 °C⁩ و به ازای هر درجه ⁦10 mV⁩ بیشتر.</li><li><b>۱۲. چرخاندن سروو</b> — سروو (Servo) موتوری است که می‌داند کجاست.</li><li><b>۱۳. چرخاندن گردونه</b> — موتور پله‌ای (Stepper) در گام‌های دقیق می‌چرخد — برای این یکی 2048 گام یک دور کامل است.</li><li><b>۱۴. گلدان هوشمند</b> — یک سنسور خازنی در خاک می‌گوید چقدر خیس است و یک صفحهٔ OLED کوچک آن را به درصد و یک حالت چهره تبدیل می‌کند.</li><li><b>۱۵. حس‌کردن نیرو</b> — مقاومت حساس به نیرو (FSR) یک صفحهٔ نازک است که با فشردنش، مقاومتش از میلیون‌ها اهم به چند صد اهم می‌رسد.</li><li><b>۱۶. ساخت یک پروژه</b> — همه‌چیز را کنار هم بگذارید: سنسور فاصله مانع را زیر نظر دارد و یک چراغ راهنمایی به راننده می‌گوید کی بایستد.</li></ol>
+          </div>
+        </noscript>
+      </div>
+    </div>
+
+    <!-- inert (not hidden) while the loading screen covers it -->
+    <div id="app" class="artboard" inert>
+      <svg class="traces" id="traces" aria-hidden="true"></svg>
+
+      <!-- Sidebar -->
+      <nav class="sidebar" aria-label="اصلی">
+        <button class="side-toggle" aria-label="بازکردن نوار کناری" aria-expanded="false">
+          <svg viewBox="0 0 24 24"><path d="M9 5.5 15.5 12 9 18.5" /></svg>
+        </button>
+        <ul class="side-nav">
+          <li class="is-active">
+            <a href="#" data-nav="home" aria-label="خانه" title="خانه">
+              <svg viewBox="0 0 32 32" class="fill"><path d="M16 4.2 3.6 15.1c-.7.6-.3 1.7.6 1.7H6v9.4c0 1 .8 1.8 1.8 1.8h5.4v-7.3h5.6V28h5.4c1 0 1.8-.8 1.8-1.8v-9.4h1.8c.9 0 1.3-1.1.6-1.7z" /></svg>
+              <span class="side-label">خانه</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" data-nav="lessons" aria-label="درس‌ها" title="درس‌ها">
+              <svg viewBox="0 0 32 32"><path d="M16 9.2C13.4 7.3 9.6 6.6 5 6.8v17.6c4.6-.2 8.4.5 11 2.4 2.6-1.9 6.4-2.6 11-2.4V6.8c-4.6-.2-8.4.5-11 2.4zM16 9.2v17.6" /><path d="M3 9.4v17.4c5-.4 9.6.2 13 2.2 3.4-2 8-2.6 13-2.2V9.4" /></svg>
+              <span class="side-label">درس‌ها</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" data-nav="parts" aria-label="قطعات" title="قطعات">
+              <svg viewBox="0 0 32 32"><rect x="8.5" y="8.5" width="15" height="15" rx="1.6" /><rect x="12" y="12" width="8" height="8" rx=".6" class="fill" /><path d="M12.5 4v4.5M16 4v4.5M19.5 4v4.5M12.5 23.5V28M16 23.5V28M19.5 23.5V28M4 12.5h4.5M4 16h4.5M4 19.5h4.5M23.5 12.5H28M23.5 16H28M23.5 19.5H28" /></svg>
+              <span class="side-label">قطعات</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" data-nav="run" aria-label="اجرای شبیه‌سازی" title="اجرای شبیه‌سازی">
+              <svg viewBox="0 0 32 32"><rect x="4.5" y="6.5" width="23" height="19" rx="1.5" /><path d="m13.5 11.6 7 4.4-7 4.4z" class="fill" /></svg>
+              <span class="side-label">شبیه‌ساز</span>
+            </a>
+          </li>
+          <li class="is-muted">
+            <a href="#" data-nav="settings" aria-label="تنظیمات" title="تنظیمات">
+              <svg viewBox="0 0 32 32" class="fill"><path d="M18.3 3.5h-4.6l-.7 3.4a9.7 9.7 0 0 0-2.6 1.5L7.1 7.3 4.8 11.2l2.6 2.3a9.9 9.9 0 0 0 0 3l-2.6 2.3 2.3 3.9 3.3-1.1c.8.6 1.7 1.1 2.6 1.5l.7 3.4h4.6l.7-3.4c.9-.4 1.8-.9 2.6-1.5l3.3 1.1 2.3-3.9-2.6-2.3a9.9 9.9 0 0 0 0-3l2.6-2.3-2.3-3.9-3.3 1.1c-.8-.6-1.7-1.1-2.6-1.5zM16 11.2a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6z" /></svg>
+              <span class="side-label">تنظیمات</span>
+            </a>
+          </li>
+          <!-- the page's language, one click away where there's room for it
+               (it's in Settings too); src/ui/sidebar.js fills in its name -->
+          <li class="is-muted side-lang">
+            <a href="#" data-nav="language" aria-label="زبان" title="زبان">
+              <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11.5" /><ellipse cx="16" cy="16" rx="5.2" ry="11.5" /><path d="M4.5 16h23M6.2 10.2h19.6M6.2 21.8h19.6" /></svg>
+              <span class="side-code" aria-hidden="true"></span>
+              <span class="side-label"></span>
+            </a>
+          </li>
+        </ul>
+        <a class="credit credit-side" href="https://aradazr.site" target="_blank" rel="noopener noreferrer" title="Designed by Arad Azarpanah">
+          <span class="credit-text"><small>طراحی از</small><b>Arad Azarpanah</b></span>
+          <span class="credit-rule" aria-hidden="true"></span>
+          <svg class="credit-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.6l5.24 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z" /></svg>
+        </a>
+      </nav>
+      <aside class="flyout" id="flyout" aria-live="polite"></aside>
+
+      <!-- Brand -->
+      <header class="brand">
+        <svg class="brand-logo" viewBox="0 0 92 50" aria-hidden="true">
+          <path class="loop" d="M24 6.5a18.5 18.5 0 1 0 0 37c8.7 0 13.4-6.6 22-18.5S59.3 6.5 68 6.5a18.5 18.5 0 1 1 0 37c-8.7 0-13.4-6.6-22-18.5S32.7 6.5 24 6.5z" />
+          <path class="sign" d="M15.5 25h12M62 25h12M68 19v12" />
+        </svg>
+        <span class="brand-rule" aria-hidden="true"></span>
+        <div class="brand-text">
+          <h1>آموزش آردوینو</h1>
+          <p>کاوش <i>·</i> درک <i>·</i> ساخت</p>
+        </div>
+        <a class="credit fa-credit-brand" href="https://aradazr.site" target="_blank" rel="noopener" title="ترجمه و بازتولید فارسی: آراد آذرپناه"><span class="credit-text"><small>ترجمه و بازتولید فارسی</small><b>آراد آذرپناه</b></span></a>
+      </header>
+
+      <!-- Stage: three.js board + callouts -->
+      <main class="stage" id="stage">
+        <canvas id="board-canvas" aria-label="نمای تعاملی سه‌بعدی. برای جابه‌جایی بکشید یا از WASD استفاده کنید، برای چرخش Q و E، و برای بزرگ‌نمایی اسکرول کنید."></canvas>
+        <svg class="leaders" id="leaders" aria-hidden="true"></svg>
+        <div class="rig" id="rig"></div>
+        <div class="tags" id="tags"></div>
+        <div class="signals" id="signals" aria-hidden="true"></div>
+        <svg class="insp-lines" id="insp-lines" aria-hidden="true"></svg>
+        <div class="inspector" id="inspector" role="dialog" aria-label="بازرس قطعه"></div>
+        <section class="schematic" id="schematic" aria-label="شماتیک مدار"></section>
+        <div class="tip" id="tip" role="tooltip"><b></b><span></span></div>
+
+        <div class="minimap" id="minimap" aria-label="نقشهٔ کوچک: برای جابه‌جایی نما کلیک کنید یا بکشید">
+          <canvas></canvas>
+        </div>
+
+        <div class="viewbar" id="viewbar" role="toolbar" aria-label="نمای سه‌بعدی">
+          <p class="view-hint">برای جابه‌جایی بکشید یا WASD · برای چرخش ⁦Q / E⁩ · برای بزرگ‌نمایی اسکرول</p>
+          <button data-view="left" title="چرخش به چپ (Q)" aria-label="چرخش به چپ">
+            <svg viewBox="0 0 24 24"><path d="M4.5 10.5A8 8 0 1 1 6 17" /><path d="M4 5v5.8h5.8" /></svg>
+          </button>
+          <button data-view="right" title="چرخش به راست (E)" aria-label="چرخش به راست">
+            <svg viewBox="0 0 24 24"><path d="M19.5 10.5A8 8 0 1 0 18 17" /><path d="M20 5v5.8h-5.8" /></svg>
+          </button>
+          <span class="viewbar-sep"></span>
+          <button data-view="out" title="کوچک‌نمایی (−)" aria-label="کوچک‌نمایی">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14" /></svg>
+          </button>
+          <button data-view="in" title="بزرگ‌نمایی (+)" aria-label="بزرگ‌نمایی">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg>
+          </button>
+          <span class="viewbar-sep"></span>
+          <button data-view="reset" class="compass" title="بازنشانی نما (R)" aria-label="بازنشانی نما">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" /><g class="compass-needle"><path d="M12 5.2 14.2 12h-4.4z" class="fill" /><path d="M12 18.8 9.8 12h4.4z" /></g></svg>
+          </button>
+          <span class="viewbar-sep"></span>
+          <button data-view="flow" class="toggle" title="جریان الکتریکی (F)" aria-label="نمایش جریان الکتریکی" aria-pressed="false">
+            <svg viewBox="0 0 24 24"><path d="M2.5 15.5c4.2 0 5.3-7 9.5-7s5.3 7 9.5 7" /><circle cx="6.6" cy="13" r="1.7" class="fill" /><circle cx="12" cy="8.5" r="1.7" class="fill" /><circle cx="17.4" cy="13" r="1.7" class="fill" /></svg>
+          </button>
+          <button data-view="schematic" class="toggle" title="شماتیک (C)" aria-label="نمایش شماتیک" aria-pressed="false">
+            <svg viewBox="0 0 24 24"><path d="M1.5 12h4.2l1.6-4 2.6 8 2.6-8 2.6 8 1.6-4h5.8" /></svg>
+          </button>
+        </div>
+      </main>
+
+      <!-- Top-right status -->
+      <section class="status" aria-label="پیشرفت">
+        <div class="progress-card">
+          <svg viewBox="0 0 40 40" class="progress-icon" aria-hidden="true"><path d="M20 10.6c-3.3-2.4-8.2-3.2-14-3v21.2c5.8-.2 10.7.6 14 3 3.3-2.4 8.2-3.2 14-3V7.6c-5.8-.2-10.7.6-14 3zM20 10.6v21.2" /><path d="M3 11v21c6.3-.5 12.6.2 17 2.6 4.4-2.4 10.7-3.1 17-2.6V11" /></svg>
+          <div class="progress-body">
+            <span class="progress-label">مقدمات</span>
+            <div class="progress-row">
+              <span class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="16" aria-valuenow="0"><span class="progress-fill" id="progress-fill"></span></span>
+              <span class="progress-count" id="progress-count">0/16</span>
+            </div>
+          </div>
+        </div>
+        <time class="clock" id="clock">
+          <span id="clock-date"></span>
+          <span id="clock-time"></span>
+        </time>
+      </section>
+
+      <!-- Right info panel -->
+      <section class="info-card" aria-label="اطلاعات درس">
+        <div class="tabs" role="tablist">
+          <button role="tab" aria-selected="true" class="is-active">مرور کلی</button>
+          <button role="tab" aria-selected="false">نقشهٔ پایه‌ها (Pinout)</button>
+          <button role="tab" aria-selected="false">مثال</button>
+          <button role="tab" aria-selected="false">مشخصات</button>
+        </div>
+        <div class="info-body" role="tabpanel">
+          <button class="expand" aria-label="بازکردن پنل">
+            <svg viewBox="0 0 24 24"><path d="M3 8V3h5M16 3h5v5M21 16v5h-5M8 21H3v-5" /><circle cx="12" cy="12" r="1.3" class="fill" /></svg>
+          </button>
+          <div class="info-content"></div>
+        </div>
+      </section>
+
+      <!-- Code card -->
+      <section class="code-card" aria-label="خودتان امتحان کنید" data-state="idle">
+        <header>
+          <h2>خودتان امتحان کنید</h2>
+          <div class="code-actions">
+            <button class="btn-ghost btn-expand" aria-label="بازکردن کد" title="بازکردن کد" aria-expanded="false">
+              <svg viewBox="0 0 24 24"><path d="M3 8V3h5M16 3h5v5M21 16v5h-5M8 21H3v-5" /><circle cx="12" cy="12" r="1.3" class="fill" /></svg>
+            </button>
+            <button class="btn-ghost btn-copy" aria-label="کپی کد" title="کپی کد">
+              <svg viewBox="0 0 24 24"><rect x="8" y="8" width="11.5" height="12.5" rx="1.6" /><path d="M15.5 5.2V4.8c0-.9-.7-1.6-1.6-1.6H6.1c-.9 0-1.6.7-1.6 1.6v9.6c0 .9.7 1.6 1.6 1.6h.4" /></svg>
+            </button>
+            <button class="btn-run" aria-label="اجرای اسکچ" title="اجرای اسکچ (Space)">
+              <svg viewBox="0 0 24 24"><path d="M7.5 4.8v14.4L19 12z" class="fill" /></svg>
+            </button>
+          </div>
+        </header>
+        <div class="code-wrap">
+          <pre class="code"><code></code></pre>
+          <div class="console">
+            <div class="console-grip" role="separator" aria-orientation="horizontal" aria-label="تغییر اندازهٔ مانیتور سریال" tabindex="-1"></div>
+            <div class="console-head">
+              <span class="console-dot"></span>
+              <span class="console-title">مانیتور سریال</span>
+              <span class="console-status">متوقف</span>
+              <button class="console-close" aria-label="توقف اسکچ">
+                <svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17" /></svg>
+              </button>
+            </div>
+            <div class="console-lines" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Lessons -->
+      <section class="lessons" aria-label="درس‌ها">
+        <h2>درس‌ها</h2>
+        <ol class="lesson-list" id="lesson-list"></ol>
+      </section>
+
+      <!-- Footer (compact layout; the wide layout keeps these in the side nav) -->
+      <footer class="app-foot">
+        <a class="credit credit-row" href="https://aradazr.site" target="_blank" rel="noopener noreferrer" title="Designed by Arad Azarpanah">
+          <svg class="credit-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.6l5.24 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z" /></svg>
+          <span class="credit-rule" aria-hidden="true"></span>
+          <span class="credit-text"><small>طراحی از</small><b>Arad Azarpanah</b></span>
+        </a>
+        <a class="credit credit-row fa-credit-row" href="https://aradazr.site" target="_blank" rel="noopener" title="ترجمه و بازتولید فارسی: آراد آذرپناه"><span class="credit-text"><small>ترجمه و بازتولید فارسی</small><b>آراد آذرپناه</b></span></a>
+      </footer>
+    </div>
+  </body>
+</html>

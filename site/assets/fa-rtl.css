@@ -1,0 +1,118 @@
+/* Persian (fa) overrides, loaded only by /fa/index.html.
+   The wide layout keeps the original artboard (sidebar left, panels right)
+   because the 3D callouts and traces are placed against it; text inside it
+   runs right-to-left, and code always stays left-to-right. */
+
+/* Peyda, 400–700 (the weights the original stylesheet uses);
+   the installed copy is used when there is one */
+@font-face {
+  font-family: "Peyda";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Peyda Regular"), local("Peyda-Regular"), url(/assets/fonts/Peyda-Regular.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Peyda";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local("Peyda Medium"), local("Peyda-Medium"), url(/assets/fonts/Peyda-Medium.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Peyda";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local("Peyda Semi Bold"), local("Peyda-SemiBold"), url(/assets/fonts/Peyda-SemiBold.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Peyda";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local("Peyda Bold"), local("Peyda-Bold"), url(/assets/fonts/Peyda-Bold.woff2) format("woff2");
+}
+
+:root:lang(fa) {
+  --sans: "Peyda", "Barlow", system-ui, sans-serif;
+  --cond: "Peyda", "Barlow Semi Condensed", "Barlow", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Peyda", monospace;
+}
+
+/* Persian letters join up, so tracking breaks them apart */
+html:lang(fa) body * {
+  letter-spacing: 0 !important;
+}
+
+/* Code blocks, the serial monitor and inline code read left-to-right */
+html:lang(fa) .code,
+html:lang(fa) .code-wrap pre,
+html:lang(fa) .console-lines {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: isolate;
+}
+html:lang(fa) code {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Left-aligned bits of the original stylesheet */
+html:lang(fa) .noscript-lessons,
+html:lang(fa) .fly-list button,
+html:lang(fa) .fly-list label,
+html:lang(fa) .pin-table th {
+  text-align: right;
+}
+html:lang(fa) .pin-table th {
+  padding: 0 0 6px 6px;
+}
+
+/* The lesson strip's prev/next buttons work out scroll position for LTR,
+   so the strip keeps its original order and only the card text is RTL */
+html:lang(fa) .lesson-list {
+  direction: ltr;
+}
+html:lang(fa) .lesson-list > li {
+  direction: rtl;
+}
+
+/* No logo or site title in the brand area, and no X profile card in the
+   bottom-left corner; the h1 stays for screen readers */
+html:lang(fa) .brand-logo,
+html:lang(fa) .brand-rule,
+html:lang(fa) .credit-side {
+  display: none;
+}
+html:lang(fa) .brand-text h1 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Translator credit: beside the brand on the wide layout, in the footer on compact */
+html:lang(fa) .fa-credit-brand {
+  align-self: center;
+  margin-inline-start: 24px;
+  padding: 7px 14px;
+}
+html.compact:lang(fa) .fa-credit-brand {
+  display: none;
+}
+
+/* Switches: off on the right, on slides left */
+html:lang(fa) .switch-track span,
+html:lang(fa) .insp-switch .knob {
+  left: auto;
+  right: 3px;
+}
+html:lang(fa) .switch input:checked + .switch-track span {
+  transform: translate(-16px);
+}
+html:lang(fa) .insp-switch input:checked + .track .knob {
+  transform: translate(-14px);
+}
