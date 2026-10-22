@@ -78,11 +78,13 @@ html:lang(fa) .lesson-list > li {
   direction: rtl;
 }
 
-/* No logo or site title in the brand area, and no X profile card in the
-   bottom-left corner; the h1 stays for screen readers */
+/* No logo or site title in the brand area or on the loading screen, and no
+   X profile card in the bottom-left corner; the h1 stays for screen readers */
 html:lang(fa) .brand-logo,
 html:lang(fa) .brand-rule,
-html:lang(fa) .credit-side {
+html:lang(fa) .credit-side,
+html:lang(fa) .loader-logo,
+html:lang(fa) .loader-title {
   display: none;
 }
 html:lang(fa) .brand-text h1 {
