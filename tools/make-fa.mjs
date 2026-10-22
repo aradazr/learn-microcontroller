@@ -70,6 +70,8 @@ html = html.replace(/\s*<link rel="(canonical|alternate)"[^>]*>/g, "");
 html = html.replace(/\s*<meta property="og:(url|locale:alternate)"[^>]*>/g, "");
 html = html.replace('content="en_US"', 'content="fa_IR"');
 html = html.replace(/https:\/\/learn-arduino-red\.vercel\.app\//g, "/");
+// Persian link-preview image
+html = html.replace(/"\/og-image\.png"/g, '"/og-image-fa.png"');
 // Persian font (Peyda, declared in fa-rtl.css), plus the RTL fixes (versioned so browsers pick up edits)
 const cssVersion = crypto.createHash("sha1").update(fs.readFileSync(path.join(site, "assets/fa-rtl.css"))).digest("hex").slice(0, 8);
 html = html.replace(
@@ -90,6 +92,7 @@ html = html.replace(/<script type="application\/ld\+json">(.*?)<\/script>/s, (m,
   o.description = t(o.description);
   o.inLanguage = "fa";
   o.teaches = o.teaches.map(t);
+  o.about = o.about.filter((a) => a !== "Arduino");
   return `<script type="application/ld+json">${JSON.stringify(o)}</script>`;
 });
 // noscript lesson list: "<b>N. Title</b> — first sentence." from the full lesson intros

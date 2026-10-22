@@ -26,7 +26,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: node tools/make-pages.mjs "/${{ github.event.repository.name }}/"
+      - run: node tools/make-pages.mjs "/${{ github.event.repository.name }}/" "https://${{ github.repository_owner }}.github.io"
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
