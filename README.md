@@ -7,6 +7,12 @@
 
 طراحی، ساخت و ترجمهٔ فارسی: [آراد آذرپناه](https://aradazr.site)
 
+## نسخهٔ آنلاین (بدون نصب)
+
+👈 **[aradazr.github.io/learn-microcontroller](https://aradazr.github.io/learn-microcontroller/)**
+
+فقط لینک را در مرورگر باز کنید. اگر اینترنت ندارید یا می‌خواهید روی کامپیوتر خودتان اجرا شود، مراحل زیر را بروید.
+
 ---
 
 ## ۱. دانلود
@@ -77,3 +83,6 @@ python3 -m http.server 8090 -d site
 ```bash
 node tools/make-fa.mjs
 ```
+
+انتشار روی GitHub Pages خودکار است: با هر push روی `main`، فایل `.github/workflows/pages.yml`
+اسکریپت `tools/make-pages.mjs` را اجرا می‌کند تا آدرس‌ها زیر مسیر `/learn-microcontroller/` درست کار کنند.
