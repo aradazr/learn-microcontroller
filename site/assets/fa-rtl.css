@@ -79,10 +79,12 @@ html:lang(fa) .lesson-list > li {
 }
 
 /* No logo or site title in the brand area or on the loading screen, and no
-   X profile card in the bottom-left corner; the h1 stays for screen readers */
+   X profile card (bottom-left when wide, footer when compact); the h1 stays
+   for screen readers */
 html:lang(fa) .brand-logo,
 html:lang(fa) .brand-rule,
 html:lang(fa) .credit-side,
+html:lang(fa) .credit-row:not(.fa-credit-row),
 html:lang(fa) .loader-logo,
 html:lang(fa) .loader-title {
   display: none;

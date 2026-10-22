@@ -28,6 +28,8 @@ const prefix = (s) => s.replace(/^\/(?!\/)/, base);
 // so it gets the Persian page's title, description and preview tags
 const head = (html) => html.match(/ *<title>[\s\S]*?(?= *<!-- linked here)/)[0];
 edit("index.html", (html) => html.replace(head(html), head(fs.readFileSync(path.join(dist, "fa/index.html"), "utf8"))));
+// its loading screen shows while it redirects, so it loses the logo and title too
+edit("index.html", (html) => html.replace("</head>", "  <style>.loader-logo,.loader-title{display:none}</style>\n  </head>"));
 edit("site.webmanifest", (json) => {
   const m = JSON.parse(json);
   m.name = "آموزش میکروکنترلر — درس‌های تعاملی سه‌بعدی";
